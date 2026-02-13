@@ -1,20 +1,21 @@
 <!DOCTYPE html>
 <html lang="en">
 <head>
-<meta charset="UTF-8">
-<meta name="viewport" content="width=device-width, initial-scale=1.0">
+<meta charset="UTF-8" />
+<meta name="viewport" content="width=device-width, initial-scale=1.0"/>
 <title>Happy Valentine My Love 💖</title>
+
+<!-- Custom Font from GitHub RAW -->
+<style>
+@font-face {
+    font-family: 'HeartFont';
+    src: url('https://raw.githubusercontent.com/Aari07/Valentine_Proposal/main/fonts/TheHeartOfEverything.ttf') format('truetype');
+}
+</style>
 
 <link href="https://fonts.googleapis.com/css2?family=Poppins:wght@400;600&display=swap" rel="stylesheet">
 
 <style>
-@font-face {
-    font-family: 'HeartFont';
-    src: url('fonts/TheHeartOfEverything.ttf') format('truetype');
-}
-
-/* ---------------- BASE ---------------- */
-
 * {
     box-sizing: border-box;
     font-family: 'Poppins', sans-serif;
@@ -23,7 +24,7 @@
 body {
     margin: 0;
     background: #f49cbb;
-    height: 100vh;
+    min-height: 100vh;
     display: flex;
     justify-content: center;
     align-items: center;
@@ -36,69 +37,61 @@ body.night {
     color: white;
 }
 
-/* ---------------- CARD ---------------- */
-
 .card {
     width: 90%;
-    max-width: 450px;
-    background: #fff;
-    border-radius: 20px;
-    padding: 25px;
+    max-width: 520px;
+    background: #ffffff;
+    border-radius: 25px;
+    padding: 40px 30px;
     text-align: center;
     position: relative;
+    box-shadow: 0 15px 40px rgba(0,0,0,0.2);
     transition: 0.4s ease;
-    box-shadow: 0 10px 25px rgba(0,0,0,0.15);
 }
 
 body.night .card {
     background: #1e1e35;
 }
 
-/* ---------------- GIF ---------------- */
-
 .gif {
-    width: 220px;
-    height: 220px;
+    width: 240px;
+    height: 240px;
     object-fit: contain;
-    margin-bottom: 15px;
+    margin-bottom: 20px;
 }
-
-/* ---------------- TEXT ---------------- */
 
 .proposal-text {
     font-family: 'HeartFont', cursive;
-    font-size: 28px;
-    margin-bottom: 10px;
+    font-size: 26px;
+    margin-bottom: 15px;
 }
 
 .typewriter {
-    min-height: 24px;
-    margin-bottom: 20px;
-    font-size: 16px;
+    min-height: 28px;
+    margin-bottom: 30px;
+    font-size: 18px;
 }
 
-/* ---------------- BUTTONS ---------------- */
-
 .buttons {
+    display: flex;
+    justify-content: center;
+    gap: 20px;
     position: relative;
-    height: 70px;
 }
 
 .btn {
-    width: 110px;
-    height: 45px;
+    width: 130px;
+    height: 50px;
     border-radius: 999px;
     border: none;
-    font-size: 16px;
+    font-size: 17px;
     cursor: pointer;
-    position: absolute;
     transition: 0.3s ease;
 }
 
 #yesBtn {
     background: #dd2d4a;
     color: white;
-    left: 20%;
 }
 
 #yesBtn:hover {
@@ -112,11 +105,26 @@ body.night .card {
 }
 
 #noBtn {
-    background: #ccc;
-    left: 60%;
+    background: #cccccc;
 }
 
-/* ---------------- TOGGLE ---------------- */
+.message {
+    margin-top: 15px;
+    color: #dd2d4a;
+    min-height: 24px;
+}
+
+.hidden { display: none; }
+
+.playAgain {
+    margin-top: 20px;
+    padding: 10px 25px;
+    border: none;
+    border-radius: 999px;
+    background: #dd2d4a;
+    color: white;
+    cursor: pointer;
+}
 
 #themeToggle {
     position: fixed;
@@ -129,13 +137,13 @@ body.night .card {
     z-index: 3;
 }
 
-/* ---------------- FLOATING HEARTS ---------------- */
-
+/* Floating Hearts */
 .heart {
     position: fixed;
     bottom: -20px;
     font-size: 20px;
     animation: floatUp 6s linear infinite;
+    pointer-events: none;
 }
 
 @keyframes floatUp {
@@ -144,8 +152,6 @@ body.night .card {
         opacity: 0;
     }
 }
-
-/* ---------------- FIREWORKS ---------------- */
 
 canvas {
     position: fixed;
@@ -160,124 +166,153 @@ canvas {
 
 <button id="themeToggle">🌙 Night</button>
 
-<audio id="bgMusic" autoplay loop>
-  <source src="audio/hearty-touching-soft.mp3" type="audio/mp3">
+<!-- Background Music -->
+<audio id="bgMusic" loop>
+  <source src="https://raw.githubusercontent.com/Aari07/Valentine_Proposal/main/audio/hearty-touching-soft.mp3" type="audio/mp3">
 </audio>
 
 <canvas id="fireworksCanvas"></canvas>
 
 <div class="card" id="mainCard">
-
     <img class="gif"
-    src="https://media.giphy.com/media/MDJ9IbxxvDUQM/giphy.gif" />
+    src="https://github.com/user-attachments/assets/1f43b9bd-9c9c-41e1-b346-30de233e5ff8" />
 
     <h2 class="proposal-text">
         Nonu, will you be my valentine? 💖
     </h2>
 
-    <div class="typewriter" id="typewriter"></div>
+    <div class="typewriter" id="typeMessage">
+        You make my world brighter every single day ✨
+    </div>
 
     <div class="buttons">
         <button id="yesBtn" class="btn">Yes 💖</button>
         <button id="noBtn" class="btn">No 😜</button>
     </div>
 
+    <div class="message" id="message"></div>
+</div>
+
+<div class="card hidden" id="congratsCard">
+    <img class="gif"
+    src="https://github.com/user-attachments/assets/898a70cd-1bfb-41f4-8abc-d4a1784bb795" />
+
+    <h1>YAY I KNEW IT 💖</h1>
+    <h2 id="finalMessage"></h2>
+
+    <button class="playAgain" id="playAgainBtn">Play Again</button>
 </div>
 
 <script>
-/* -------- MUSIC AUTOPLAY FIX -------- */
+const noBtn = document.getElementById("noBtn");
+const yesBtn = document.getElementById("yesBtn");
+const messageBox = document.getElementById("message");
+const mainCard = document.getElementById("mainCard");
+const congratsCard = document.getElementById("congratsCard");
+const playAgainBtn = document.getElementById("playAgainBtn");
+const finalMessage = document.getElementById("finalMessage");
+const themeToggle = document.getElementById("themeToggle");
 const bgMusic = document.getElementById("bgMusic");
+
+/* Autoplay fix */
 document.addEventListener("click", () => {
     bgMusic.play().catch(()=>{});
-});
+}, { once: true });
 
-/* -------- THEME TOGGLE -------- */
-const themeToggle = document.getElementById("themeToggle");
+/* Theme toggle */
 themeToggle.addEventListener("click", () => {
     document.body.classList.toggle("night");
     themeToggle.textContent =
         document.body.classList.contains("night") ? "☀ Day" : "🌙 Night";
 });
 
-/* -------- TYPEWRITER -------- */
-const message = "You make my world brighter every single day ✨";
-let i = 0;
-function typeEffect() {
-    if (i < message.length) {
-        document.getElementById("typewriter").innerHTML += message.charAt(i);
-        i++;
-        setTimeout(typeEffect, 60);
-    }
-}
-typeEffect();
-
-/* -------- MOVE NO BUTTON -------- */
-const noBtn = document.getElementById("noBtn");
-const container = document.querySelector(".buttons");
-
-noBtn.addEventListener("mouseenter", () => {
-    const maxX = container.clientWidth - noBtn.offsetWidth;
-    const maxY = container.clientHeight - noBtn.offsetHeight;
-    noBtn.style.left = Math.random() * maxX + "px";
-    noBtn.style.top = Math.random() * maxY + "px";
-});
-
-/* -------- FLOATING HEARTS -------- */
+/* Floating hearts */
 function createHeart() {
     const heart = document.createElement("div");
     heart.className = "heart";
     heart.innerHTML = "💖";
-    heart.style.left = Math.random() * 100 + "vw";
+    heart.style.left = Math.random()*100 + "vw";
+    heart.style.fontSize = Math.random()*20 + 15 + "px";
     document.body.appendChild(heart);
-    setTimeout(() => heart.remove(), 6000);
+    setTimeout(()=>heart.remove(),6000);
 }
-setInterval(createHeart, 900);
+setInterval(createHeart, 800);
 
-/* -------- FIREWORKS -------- */
+/* No button playful move */
+noBtn.addEventListener("mouseenter", () => {
+    const x = Math.random() * 60 - 30;
+    const y = Math.random() * 40 - 20;
+    noBtn.style.transform = `translate(${x}px, ${y}px)`;
+    messageBox.textContent = "Press Yes 😏💖";
+});
+
+/* Typewriter */
+function typeWriter(text, speed=60) {
+    finalMessage.textContent="";
+    let i=0;
+    function typing(){
+        if(i<text.length){
+            finalMessage.textContent+=text[i];
+            i++;
+            setTimeout(typing,speed);
+        }
+    }
+    typing();
+}
+
+/* Fireworks */
 const canvas = document.getElementById("fireworksCanvas");
 const ctx = canvas.getContext("2d");
-let particles = [];
+let particles=[];
 let animationId;
 
-function resizeCanvas() {
-    canvas.width = window.innerWidth;
-    canvas.height = window.innerHeight;
+function resizeCanvas(){
+    canvas.width=window.innerWidth;
+    canvas.height=window.innerHeight;
 }
 resizeCanvas();
-window.addEventListener("resize", resizeCanvas);
+window.addEventListener("resize",resizeCanvas);
 
-function createFirework(x, y) {
-    for (let i = 0; i < 70; i++) {
+function createFirework(x,y){
+    for(let i=0;i<80;i++){
         particles.push({
-            x, y,
-            angle: Math.random() * 2 * Math.PI,
-            speed: Math.random() * 4 + 2,
-            alpha: 1
+            x,y,
+            angle:Math.random()*2*Math.PI,
+            speed:Math.random()*5+2,
+            alpha:1
         });
     }
 }
 
-function animate() {
-    ctx.clearRect(0, 0, canvas.width, canvas.height);
-    particles.forEach((p, i) => {
-        p.x += Math.cos(p.angle) * p.speed;
-        p.y += Math.sin(p.angle) * p.speed;
-        p.alpha -= 0.02;
-
-        ctx.fillStyle = `rgba(255,0,120,${p.alpha})`;
+function animate(){
+    ctx.clearRect(0,0,canvas.width,canvas.height);
+    particles.forEach((p,i)=>{
+        p.x+=Math.cos(p.angle)*p.speed;
+        p.y+=Math.sin(p.angle)*p.speed;
+        p.alpha-=0.02;
+        ctx.fillStyle=`rgba(255,0,120,${p.alpha})`;
         ctx.beginPath();
-        ctx.arc(p.x, p.y, 2, 0, Math.PI * 2);
+        ctx.arc(p.x,p.y,2,0,Math.PI*2);
         ctx.fill();
-
-        if (p.alpha <= 0) particles.splice(i, 1);
+        if(p.alpha<=0) particles.splice(i,1);
     });
-
-    animationId = requestAnimationFrame(animate);
+    animationId=requestAnimationFrame(animate);
 }
-animate();
 
-document.getElementById("yesBtn").addEventListener("click", () => {
-    createFirework(window.innerWidth / 2, window.innerHeight / 2);
+yesBtn.addEventListener("click",()=>{
+    mainCard.classList.add("hidden");
+    congratsCard.classList.remove("hidden");
+    typeWriter("Happy Valentine my love 💖");
+    createFirework(canvas.width/2,canvas.height/3);
+    animate();
+});
+
+playAgainBtn.addEventListener("click",()=>{
+    congratsCard.classList.add("hidden");
+    mainCard.classList.remove("hidden");
+    messageBox.textContent="";
+    cancelAnimationFrame(animationId);
+    ctx.clearRect(0,0,canvas.width,canvas.height);
 });
 </script>
 
