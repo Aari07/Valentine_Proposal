@@ -1,236 +1,219 @@
 <!DOCTYPE html>
 <html lang="en">
 <head>
-<meta charset="UTF-8" />
-<meta name="viewport" content="width=device-width, initial-scale=1.0"/>
+<meta charset="UTF-8">
+<meta name="viewport" content="width=device-width, initial-scale=1.0">
 <title>Happy Valentine My Love 💖</title>
 
 <style>
 @font-face {
-    font-family: 'HeartFont';
-    src: url('https://raw.githubusercontent.com/Aari07/Valentine_Proposal/main/fonts/TheHeartOfEverything.ttf') format('truetype');
+  font-family: 'HeartFont';
+  src: url('https://raw.githubusercontent.com/Aari07/Valentine_Proposal/main/fonts/TheHeartOfEverything.ttf') format('truetype');
 }
 
-* { box-sizing: border-box; }
+* { box-sizing: border-box; margin: 0; padding: 0; }
 
 body {
-    margin: 0;
-    font-family: 'Poppins', sans-serif;
-    background: #f49cbb;
-    display: flex;
-    justify-content: center;
-    align-items: center;
-    min-height: 100vh;
-    overflow-x: hidden;
+  font-family: Arial, sans-serif;
+  background: #f49cbb;
+  display: flex;
+  justify-content: center;
+  align-items: center;
+  height: 100vh;
+  overflow: hidden;
 }
 
 .card {
-    width: 95%;
-    max-width: 520px;
-    background: #ffffff;
-    border-radius: 25px;
-    padding: 35px 25px;
-    text-align: center;
-    position: relative;
-    z-index: 2;
+  background: white;
+  width: 95%;
+  max-width: 520px;
+  padding: 30px;
+  border-radius: 20px;
+  text-align: center;
+  position: relative;
+  z-index: 2;
 }
 
 .gif {
-    width: 260px;
-    height: 260px;
-    object-fit: contain;
+  width: 250px;
+  height: 250px;
+  object-fit: contain;
 }
 
 .proposal-text {
-    font-family: 'HeartFont', cursive;
-    font-size: 30px;
+  font-family: 'HeartFont', cursive;
+  font-size: 28px;
+  margin: 15px 0;
 }
 
 .buttons {
-    position: relative;
-    height: 90px;
+  position: relative;
+  height: 80px;
+  margin-top: 15px;
 }
 
-.btn {
-    width: 130px;
-    height: 55px;
-    border-radius: 999px;
-    border: none;
-    font-size: 18px;
-    cursor: pointer;
-    position: absolute;
-    transition: 0.3s ease;
+button {
+  width: 120px;
+  height: 50px;
+  border-radius: 999px;
+  border: none;
+  font-size: 16px;
+  cursor: pointer;
+  position: absolute;
+  transition: 0.3s ease;
 }
 
 #yesBtn {
-    background: #ff4d6d;
-    color: white;
-    left: 15%;
+  left: 15%;
+  background: #ff4d6d;
+  color: white;
 }
 
 #yesBtn:hover {
-    animation: heartbeat 0.8s infinite;
+  animation: heartbeat 0.8s infinite;
 }
 
 @keyframes heartbeat {
-    0% { transform: scale(1); }
-    50% { transform: scale(1.15); }
-    100% { transform: scale(1); }
+  0% { transform: scale(1); }
+  50% { transform: scale(1.15); }
+  100% { transform: scale(1); }
 }
 
 #noBtn {
-    background: #d9d9d9;
-    left: 55%;
+  left: 55%;
+  background: #d9d9d9;
 }
 
 .message {
-    margin-top: 15px;
-    color: #ff4d6d;
+  margin-top: 15px;
+  color: #ff4d6d;
+  min-height: 20px;
 }
 
 .hidden { display: none; }
 
 canvas {
-    position: fixed;
-    top: 0;
-    left: 0;
-    z-index: 0;
-    pointer-events: none;
+  position: fixed;
+  top: 0;
+  left: 0;
+  pointer-events: none;
+  z-index: 0;
 }
 </style>
 </head>
 
 <body>
 
-<audio id="bgMusic" autoplay loop muted>
-  <source src="https://raw.githubusercontent.com/Aari07/Valentine_Proposal/main/audio/hearty-touching-soft.mp3" type="audio/mp3">
+<audio id="bgMusic" loop>
+  <source src="https://raw.githubusercontent.com/Aari07/Valentine_Proposal/main/audio/hearty-touching-soft.mp3" type="audio/mpeg">
 </audio>
 
-<canvas id="fireworksCanvas"></canvas>
+<canvas id="fireworks"></canvas>
 
 <div class="card" id="mainCard">
-    <img class="gif"
-    src="https://github.com/user-attachments/assets/1f43b9bd-9c9c-41e1-b346-30de233e5ff8" />
+  <img class="gif"
+  src="https://github.com/user-attachments/assets/1f43b9bd-9c9c-41e1-b346-30de233e5ff8">
 
-    <h2 class="proposal-text">
-        Nonu, will you be my valentine? 💖
-    </h2>
+  <div class="proposal-text">
+    Nonu, will you be my valentine? 💖
+  </div>
 
-    <div class="buttons">
-        <button id="yesBtn" class="btn">Yes 💖</button>
-        <button id="noBtn" class="btn">No 😜</button>
-    </div>
+  <div class="buttons">
+    <button id="yesBtn">Yes 💖</button>
+    <button id="noBtn">No 😜</button>
+  </div>
 
-    <div class="message" id="message"></div>
+  <div class="message" id="message"></div>
 </div>
 
 <div class="card hidden" id="congratsCard">
-    <img class="gif"
-    src="https://github.com/user-attachments/assets/898a70cd-1bfb-41f4-8abc-d4a1784bb795" />
+  <img class="gif"
+  src="https://github.com/user-attachments/assets/898a70cd-1bfb-41f4-8abc-d4a1784bb795">
 
-    <h1>YAY I KNEW IT 💖</h1>
-    <h2 id="typeMessage"></h2>
+  <h1>YAY I KNEW IT 💖</h1>
 </div>
 
 <script>
-const noBtn = document.getElementById("noBtn");
+document.addEventListener("DOMContentLoaded", function() {
+
 const yesBtn = document.getElementById("yesBtn");
-const messageBox = document.getElementById("message");
+const noBtn = document.getElementById("noBtn");
+const message = document.getElementById("message");
 const mainCard = document.getElementById("mainCard");
 const congratsCard = document.getElementById("congratsCard");
-const typeMessage = document.getElementById("typeMessage");
-const bgMusic = document.getElementById("bgMusic");
+const music = document.getElementById("bgMusic");
 
-/* Fix autoplay (unmute on first interaction) */
-document.addEventListener("click", () => {
-    bgMusic.muted = false;
-    bgMusic.play();
+/* ===== Music Start On First Click (Browser Safe) ===== */
+document.body.addEventListener("click", function() {
+  music.play().catch(()=>{});
 }, { once: true });
 
-/* Clean Messages */
+/* ===== Random Messages ===== */
 const messages = [
 "Don’t press it 😒",
 "I don’t like no",
 "Wrong choice buddy",
-"That button is broken",
-"You know what to press",
-"No is illegal here",
+"You know what to press 💖",
 "Try again 😏",
-"Seriously?",
-"That hurts",
-"Please press yes"
+"Please press yes",
+"This is fate",
+"Last chance 😤"
 ];
 
-/* NO Button Movement */
-noBtn.addEventListener("mouseenter", () => {
-    const x = Math.random() * 60 - 30;
-    const y = Math.random() * 40 - 20;
-    noBtn.style.transform = `translate(${x}px, ${y}px)`;
-    messageBox.textContent =
-        messages[Math.floor(Math.random()*messages.length)];
+/* ===== NO Button Movement ===== */
+noBtn.addEventListener("mouseenter", function() {
+  const x = Math.random() * 100 - 50;
+  const y = Math.random() * 50 - 25;
+  noBtn.style.transform = `translate(${x}px, ${y}px)`;
+  message.textContent = messages[Math.floor(Math.random()*messages.length)];
 });
 
-/* Typewriter */
-function typeWriter(text, speed=60) {
-    typeMessage.textContent="";
-    let i=0;
-    function typing(){
-        if(i<text.length){
-            typeMessage.textContent+=text[i];
-            i++;
-            setTimeout(typing,speed);
-        }
-    }
-    typing();
-}
+/* ===== YES Click ===== */
+yesBtn.addEventListener("click", function() {
+  mainCard.classList.add("hidden");
+  congratsCard.classList.remove("hidden");
+  startFireworks();
+});
 
-/* Fireworks */
-const canvas = document.getElementById("fireworksCanvas");
+/* ===== Fireworks ===== */
+const canvas = document.getElementById("fireworks");
 const ctx = canvas.getContext("2d");
-let particles=[];
-let animationId;
+let particles = [];
 
-function resizeCanvas(){
-    canvas.width=window.innerWidth;
-    canvas.height=window.innerHeight;
+function resizeCanvas() {
+  canvas.width = window.innerWidth;
+  canvas.height = window.innerHeight;
 }
 resizeCanvas();
-window.addEventListener("resize",resizeCanvas);
+window.addEventListener("resize", resizeCanvas);
 
-function createFirework(x,y){
-    for(let i=0;i<70;i++){
-        particles.push({
-            x,y,
-            angle:Math.random()*2*Math.PI,
-            speed:Math.random()*5+2,
-            alpha:1
-        });
-    }
-}
-
-function animate(){
-    ctx.clearRect(0,0,canvas.width,canvas.height);
-    particles.forEach((p,i)=>{
-        p.x+=Math.cos(p.angle)*p.speed;
-        p.y+=Math.sin(p.angle)*p.speed;
-        p.alpha-=0.02;
-        ctx.fillStyle=`rgba(255,0,120,${p.alpha})`;
-        ctx.beginPath();
-        ctx.arc(p.x,p.y,2,0,Math.PI*2);
-        ctx.fill();
-        if(p.alpha<=0) particles.splice(i,1);
+function createFirework() {
+  let x = Math.random() * canvas.width;
+  let y = Math.random() * canvas.height / 2;
+  for (let i=0;i<60;i++) {
+    particles.push({
+      x,y,
+      angle:Math.random()*2*Math.PI,
+      speed:Math.random()*5+2,
+      alpha:1
     });
-    animationId=requestAnimationFrame(animate);
+  }
 }
 
-yesBtn.addEventListener("click",()=>{
-    mainCard.classList.add("hidden");
-    congratsCard.classList.remove("hidden");
-    typeWriter("Happy Valentine my love 💖");
-    createFirework(window.innerWidth/2, window.innerHeight/3);
-    animate();
-});
-</script>
+function animate() {
+  ctx.clearRect(0,0,canvas.width,canvas.height);
+  particles.forEach((p,i)=>{
+    p.x += Math.cos(p.angle)*p.speed;
+    p.y += Math.sin(p.angle)*p.speed;
+    p.alpha -= 0.02;
+    ctx.fillStyle=`rgba(255,0,120,${p.alpha})`;
+    ctx.beginPath();
+    ctx.arc(p.x,p.y,2,0,Math.PI*2);
+    ctx.fill();
+    if(p.alpha<=0) particles.splice(i,1);
+  });
+  requestAnimationFrame(animate);
+}
 
-</body>
-</html>
+function startFireworks() {
+  setInterval(createFirework,700);
