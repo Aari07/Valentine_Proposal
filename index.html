@@ -1,157 +1,100 @@
 <!DOCTYPE html>
 <html lang="en">
 <head>
-<meta charset="UTF-8" />
-<meta name="viewport" content="width=device-width, initial-scale=1.0"/>
-<title>Happy Valentine My Love 💖</title>
+<meta charset="UTF-8">
+<meta name="viewport" content="width=device-width, initial-scale=1.0">
+<title>Valentine Proposal 💖</title>
 
-<!-- Custom Proposal Font -->
+<!-- Google Font for clean typography -->
+<link href="https://fonts.googleapis.com/css2?family=Poppins:wght@300;500;700&display=swap" rel="stylesheet">
+
 <style>
 @font-face {
     font-family: 'HeartFont';
     src: url('fonts/TheHeartOfEverything.ttf') format('truetype');
 }
-</style>
 
-<link href="https://fonts.googleapis.com/css2?family=Poppins:wght@400;600&display=swap" rel="stylesheet">
-
-<style>
 * {
+    margin: 0;
+    padding: 0;
     box-sizing: border-box;
-    font-family: 'Poppins', sans-serif;
 }
 
 body {
-    margin: 0;
-    background: #f49cbb;
+    font-family: 'Poppins', sans-serif;
+    background: #ff9eb5;
     height: 100vh;
+    overflow: hidden;
+    transition: 0.5s ease;
     display: flex;
     justify-content: center;
     align-items: center;
-    overflow: hidden;
-    transition: 0.4s ease;
 }
 
-body.night {
-    background: #121220;
+body.dark {
+    background: #0f172a;
+}
+
+.container {
+    background: white;
+    padding: 40px 25px;
+    border-radius: 20px;
+    text-align: center;
+    width: 90%;
+    max-width: 400px;
+    position: relative;
+    box-shadow: 0 10px 30px rgba(0,0,0,0.2);
+}
+
+body.dark .container {
+    background: #1e293b;
     color: white;
 }
 
-.card {
-    width: 90%;
-    max-width: 500px;
-    background: #fff;
-    border-radius: 20px;
-    padding: 20px;
-    text-align: center;
-    position: relative;
-    overflow: hidden;
-    transition: 0.4s ease;
-}
-
-body.night .card {
-    background: #1e1e35;
-}
-
-.gif {
-    width: 300px;
-    height: 300px;
-    object-fit: contain;
-    max-width: 100%;
-}
-
-/* Proposal Font */
-.proposal-text {
+h1 {
     font-family: 'HeartFont', cursive;
-    font-size: 34px;
+    font-size: 28px;
     margin-bottom: 20px;
 }
 
-h1 { color: #dd2d4a; margin: 10px 0; }
+.typewriter {
+    font-size: 18px;
+    min-height: 24px;
+    margin-bottom: 25px;
+}
 
 .buttons {
     position: relative;
-    height: 120px;
+    height: 60px;
 }
 
-.btn {
-    width: 120px;
-    height: 60px;
-    border-radius: 999px;
+button {
+    padding: 10px 20px;
     border: none;
-    font-size: 18px;
+    border-radius: 30px;
+    font-size: 16px;
     cursor: pointer;
     position: absolute;
     transition: 0.3s ease;
 }
 
-#yesBtn {
-    background: #dd2d4a;
-    color: white;
+.yes {
     left: 20%;
-    top: 30px;
-}
-
-#yesBtn:hover {
-    animation: heartbeat 0.6s infinite;
-}
-
-@keyframes heartbeat {
-    0% { transform: scale(1); }
-    50% { transform: scale(1.15); }
-    100% { transform: scale(1); }
-}
-
-#noBtn {
-    background: #cbeef3;
-    color: #333;
-    left: 60%;
-    top: 30px;
-}
-
-.message {
-    margin-top: 15px;
-    color: #dd2d4a;
-    min-height: 24px;
-}
-
-.hidden { display: none; }
-
-.playAgain {
-    margin-top: 20px;
-    padding: 10px 25px;
-    border: none;
-    border-radius: 999px;
-    background: #dd2d4a;
+    background: #ff4d6d;
     color: white;
+}
+
+.no {
+    right: 20%;
+    background: #ccc;
+}
+
+.toggle {
+    position: absolute;
+    top: -50px;
+    right: 0;
+    font-size: 14px;
     cursor: pointer;
-}
-
-#themeToggle {
-    position: fixed;
-    top: 15px;
-    right: 15px;
-    padding: 8px 14px;
-    border-radius: 20px;
-    border: none;
-    cursor: pointer;
-    z-index: 3;
-}
-
-/* Floating hearts */
-.heart {
-    position: fixed;
-    bottom: -20px;
-    color: #ff4d6d;
-    animation: floatUp 8s linear infinite;
-    pointer-events: none;
-}
-
-@keyframes floatUp {
-    to {
-        transform: translateY(-110vh);
-        opacity: 0;
-    }
 }
 
 canvas {
@@ -165,166 +108,130 @@ canvas {
 
 <body>
 
-<button id="themeToggle">🌙 Night</button>
-
-<!-- Updated Music File -->
 <audio id="bgMusic" autoplay loop>
-  <source src="audio/hearty-touching-soft.mp3" type="audio/mp3">
+    <source src="audio/hearty-touching-soft.mp3" type="audio/mp3">
 </audio>
 
-<canvas id="fireworksCanvas"></canvas>
+<canvas id="fireworks"></canvas>
 
-<div class="card" id="mainCard">
-    <img class="gif"
-    src="https://github.com/user-attachments/assets/1f43b9bd-9c9c-41e1-b346-30de233e5ff8" />
+<div class="container">
+    <div class="toggle" onclick="toggleTheme()">🌙 Toggle</div>
 
-    <h2 class="proposal-text">
-        Nonu, will you be my valentine? 💖
-    </h2>
+    <h1>Nonu, will you be my valentine? 💖</h1>
+
+    <div class="typewriter" id="typewriter"></div>
 
     <div class="buttons">
-        <button id="yesBtn" class="btn">Yes</button>
-        <button id="noBtn" class="btn">No</button>
+        <button class="yes" onclick="celebrate()">Yes 💘</button>
+        <button class="no" id="noBtn">No 😜</button>
     </div>
-
-    <div class="message" id="message"></div>
-</div>
-
-<div class="card hidden" id="congratsCard">
-    <img class="gif"
-    src="https://github.com/user-attachments/assets/898a70cd-1bfb-41f4-8abc-d4a1784bb795" />
-
-    <h1>YAY I KNEW IT 💖</h1>
-    <h2 id="typeMessage"></h2>
-
-    <button class="playAgain" id="playAgainBtn">Play Again</button>
 </div>
 
 <script>
-const noBtn = document.getElementById("noBtn");
-const yesBtn = document.getElementById("yesBtn");
-const messageBox = document.getElementById("message");
-const container = document.querySelector(".buttons");
-const mainCard = document.getElementById("mainCard");
-const congratsCard = document.getElementById("congratsCard");
-const playAgainBtn = document.getElementById("playAgainBtn");
-const typeMessage = document.getElementById("typeMessage");
-const themeToggle = document.getElementById("themeToggle");
-const bgMusic = document.getElementById("bgMusic");
-
-/* Autoplay fix */
-document.addEventListener("click", () => bgMusic.play().catch(()=>{}));
-
-/* Theme toggle */
-themeToggle.addEventListener("click", () => {
-    document.body.classList.toggle("night");
-    themeToggle.textContent =
-        document.body.classList.contains("night") ? "☀ Day" : "🌙 Night";
-});
-
-/* Floating hearts */
-function createHeart() {
-    const heart = document.createElement("div");
-    heart.className = "heart";
-    heart.innerHTML = "❤";
-    heart.style.left = Math.random()*100 + "vw";
-    heart.style.fontSize = Math.random()*20 + 15 + "px";
-    document.body.appendChild(heart);
-    setTimeout(()=>heart.remove(),8000);
-}
-setInterval(createHeart, 600);
-
-/* No button movement */
-const messages = ["No is illegal 😒","Wrong choice","Try again 😏","Press Yes please 💖"];
-
-noBtn.addEventListener("mouseenter", () => {
-    const maxX = container.clientWidth - noBtn.offsetWidth;
-    const maxY = container.clientHeight - noBtn.offsetHeight;
-    noBtn.style.left = Math.random()*maxX + "px";
-    noBtn.style.top = Math.random()*maxY + "px";
-    messageBox.textContent = messages[Math.floor(Math.random()*messages.length)];
-});
-
-/* Typewriter */
-function typeWriter(text, speed=60) {
-    typeMessage.textContent="";
-    let i=0;
-    function typing(){
-        if(i<text.length){
-            typeMessage.textContent+=text[i];
-            i++;
-            setTimeout(typing,speed);
-        }
+/* ---------------- TYPEWRITER ---------------- */
+const message = "You make my world brighter every single day ✨";
+let i = 0;
+function typeEffect() {
+    if (i < message.length) {
+        document.getElementById("typewriter").innerHTML += message.charAt(i);
+        i++;
+        setTimeout(typeEffect, 60);
     }
-    typing();
+}
+typeEffect();
+
+/* ---------------- THEME TOGGLE ---------------- */
+function toggleTheme() {
+    document.body.classList.toggle("dark");
 }
 
-/* Fireworks */
-const canvas = document.getElementById("fireworksCanvas");
+/* ---------------- MOVE NO BUTTON ---------------- */
+const noBtn = document.getElementById("noBtn");
+const container = document.querySelector(".container");
+
+noBtn.addEventListener("mouseover", () => {
+    const containerRect = container.getBoundingClientRect();
+    const btnWidth = noBtn.offsetWidth;
+    const btnHeight = noBtn.offsetHeight;
+
+    const maxX = containerRect.width - btnWidth;
+    const maxY = 60 - btnHeight;
+
+    const randomX = Math.floor(Math.random() * maxX);
+    const randomY = Math.floor(Math.random() * maxY);
+
+    noBtn.style.left = randomX + "px";
+    noBtn.style.top = randomY + "px";
+});
+
+/* ---------------- FIREWORKS ---------------- */
+const canvas = document.getElementById("fireworks");
 const ctx = canvas.getContext("2d");
-let particles=[];
-let animationId;
-let fireInterval;
+canvas.width = window.innerWidth;
+canvas.height = window.innerHeight;
 
-function resizeCanvas(){
-    canvas.width=window.innerWidth;
-    canvas.height=window.innerHeight;
-}
-resizeCanvas();
-window.addEventListener("resize",resizeCanvas);
+let particles = [];
 
-function createFirework(x,y){
-    for(let i=0;i<80;i++){
+function createFirework(x, y) {
+    for (let i = 0; i < 50; i++) {
         particles.push({
-            x,y,
-            angle:Math.random()*2*Math.PI,
-            speed:Math.random()*5+2,
-            alpha:1
+            x: x,
+            y: y,
+            radius: Math.random() * 2,
+            color: `hsl(${Math.random() * 360},100%,50%)`,
+            speedX: (Math.random() - 0.5) * 6,
+            speedY: (Math.random() - 0.5) * 6,
+            life: 100
         });
     }
 }
 
-function animate(){
+function animateFireworks() {
     ctx.clearRect(0,0,canvas.width,canvas.height);
-    particles.forEach((p,i)=>{
-        p.x+=Math.cos(p.angle)*p.speed;
-        p.y+=Math.sin(p.angle)*p.speed;
-        p.alpha-=0.02;
-        ctx.fillStyle=`rgba(255,0,120,${p.alpha})`;
+    particles.forEach((p,index) => {
+        p.x += p.speedX;
+        p.y += p.speedY;
+        p.life--;
         ctx.beginPath();
-        ctx.arc(p.x,p.y,2,0,Math.PI*2);
+        ctx.arc(p.x,p.y,p.radius,0,Math.PI*2);
+        ctx.fillStyle = p.color;
         ctx.fill();
-        if(p.alpha<=0) particles.splice(i,1);
+        if(p.life <= 0) particles.splice(index,1);
     });
-    animationId=requestAnimationFrame(animate);
+    requestAnimationFrame(animateFireworks);
+}
+animateFireworks();
+
+function celebrate() {
+    for(let i=0;i<5;i++){
+        createFirework(Math.random()*canvas.width, Math.random()*canvas.height);
+    }
 }
 
-function startFireworks(){
-    animate();
-    fireInterval=setInterval(()=>{
-        createFirework(Math.random()*canvas.width,
-                       Math.random()*canvas.height/2);
-    },700);
-}
+/* ---------------- FLOATING HEARTS ---------------- */
+setInterval(() => {
+    const heart = document.createElement("div");
+    heart.innerHTML = "💖";
+    heart.style.position = "fixed";
+    heart.style.left = Math.random() * window.innerWidth + "px";
+    heart.style.top = window.innerHeight + "px";
+    heart.style.fontSize = "20px";
+    heart.style.animation = "floatUp 4s linear";
+    document.body.appendChild(heart);
+    setTimeout(() => heart.remove(), 4000);
+}, 800);
 
-function stopFireworks(){
-    cancelAnimationFrame(animationId);
-    clearInterval(fireInterval);
-    ctx.clearRect(0,0,canvas.width,canvas.height);
-}
+const style = document.createElement('style');
+style.innerHTML = `
+@keyframes floatUp {
+    from { transform: translateY(0); opacity:1; }
+    to { transform: translateY(-100vh); opacity:0; }
+}`;
+document.head.appendChild(style);
 
-yesBtn.addEventListener("click",()=>{
-    mainCard.classList.add("hidden");
-    congratsCard.classList.remove("hidden");
-    typeWriter("Happy Valentine my love 💖");
-    startFireworks();
-});
-
-playAgainBtn.addEventListener("click",()=>{
-    congratsCard.classList.add("hidden");
-    mainCard.classList.remove("hidden");
-    messageBox.textContent="";
-    stopFireworks();
+/* --------- AUTOPLAY FALLBACK (Required for browsers) --------- */
+document.body.addEventListener("click", () => {
+    document.getElementById("bgMusic").play().catch(()=>{});
 });
 </script>
 
